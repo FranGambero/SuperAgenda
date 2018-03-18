@@ -9,6 +9,7 @@ import agenda.model.AgendaFactory;
 import agenda.model.Persona;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,9 +30,22 @@ public class AgendaCreateServlet extends HttpServlet {
         HttpSession session = request.getSession();
         AgendaFactory agendaDB = (AgendaFactory)session.getAttribute("agendaDB");
         
+        int id=0;
         
         try{
-           int id = agendaDB.getAgenda().size();
+            String str = request.getParameter("id");
+            if(str != null){
+                id = Integer.parseInt(request.getParameter("id"));
+            }
+        }catch(Exception e){
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/error.jsp");
+            rd.forward(request, response);
+            return;
+        }
+        
+        
+        try{
+           //int id = agendaDB.getAgenda().size();
 
            String tagNombre = request.getParameter("nombre");           
            String tagApellidos = request.getParameter("apellidos");
@@ -40,7 +54,11 @@ public class AgendaCreateServlet extends HttpServlet {
            
            Persona personaNueva = new Persona(id, tagNombre, tagApellidos, tagCorreo, tagTelefono);       
            
-           agendaDB.createPersona(personaNueva);
+           if(id == 0){
+                agendaDB.createPersona(personaNueva);
+           }else{
+               agendaDB.updatePersona(personaNueva);
+           }
            
            response.sendRedirect(request.getContextPath() + "/AgendaList");
            

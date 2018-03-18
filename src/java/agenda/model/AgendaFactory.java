@@ -39,6 +39,7 @@ public class AgendaFactory implements AgendaFacade{
     public int createPersona(Persona persona) {
         //Random rnd = new Random();
         //persona.setId(rnd.nextInt());
+        persona.setId(agenda.size() + 1);
         
         agenda.add(persona);
         
