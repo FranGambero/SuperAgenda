@@ -9,17 +9,17 @@ import java.util.*;
 
 /**
  *
- * @author Fran Gambero
+  * @author Fran Gambero
  */
-public class AgendaFactory implements AgendaFacade{
+public class AgendaFactory implements AgendaFacade {
     
     private Collection<Persona> agenda = new ArrayList<>();
 
     public Collection<Persona> getAgenda() {
         return agenda;
     }
-
-    public void setAgenda(Collection<Persona> agenda) {
+ 
+     public void setAgenda(Collection<Persona> agenda) {
         this.agenda = agenda;
     }
 
@@ -27,7 +27,7 @@ public class AgendaFactory implements AgendaFacade{
         init();
     }
     
-    private void init(){
+    private void init() {
         agenda.add(new Persona(1, "Fran", "Gambero", "takox@uma.es", "1111111"));
         agenda.add(new Persona(2, "Andrea", "Rodríguez", "myane@photos.com", "222222"));
         agenda.add(new Persona(3, "Eduardo", "Pertierra", "tuh_edu_rexulon@hotmail.com", "3333333"));
@@ -51,11 +51,11 @@ public class AgendaFactory implements AgendaFacade{
         ArrayList<Persona> agendaCopia = (ArrayList)agenda; //Copiamos nuestta agenda para actualizar
         int index = 0;
         
-        for(Persona p : agenda){
-            if(nuevaPersona.getId() == p.getId()){ //Si encontramos el id de la persona deseada, sobreescribimos la info.
+        for(Persona p : agenda) {
+            if(nuevaPersona.getId() == p.getId()) { //Si encontramos el id de la persona deseada, sobreescribimos la info.
                 agendaCopia.set(index, nuevaPersona);
                 break;
-            } else{
+            } else {
                 index++;
             }
         }
@@ -64,8 +64,8 @@ public class AgendaFactory implements AgendaFacade{
 
     @Override
     public Persona findPersona(int id) {
-        for(Persona p: agenda){
-            if(p.getId() == id){
+        for(Persona p: agenda) {
+            if(p.getId() == id) {
                 return p;
             }
         }
@@ -76,8 +76,8 @@ public class AgendaFactory implements AgendaFacade{
     public void deletePersona(int id) {
         Collection<Persona> nuevaAgenda = new ArrayList<>();
         
-        for(Persona p : agenda){
-            if(p.getId() != id){
+        for(Persona p : agenda) {
+            if(p.getId() != id) {
                 nuevaAgenda.add(p);
             }
         }
